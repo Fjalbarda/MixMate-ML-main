@@ -54,25 +54,27 @@ def predict():
 
             if not df_recommendation.empty:
                 for index, row in df_recommendation.iterrows():
-                    items = row["rekomendasi"].split(", ")
+                    kategori = row["kategori"].split(", ")
+                    rekomendasi = row["rekomendasi"].split(", ")
                     images = row["gambar"].split(", ")
                     price = row["price"].split(", ")
                     style = row["style"]
-                    outfits.append((items, images, style, price))
+                    outfits.append((kategori, rekomendasi, images, style, price))
                     
             
             # Randomly select one outfit
             random_outfit = random.choice(outfits)
-            items, images, style, price = random_outfit
+            kategori, rekomendasi, images, style, price = random_outfit
 
             # Add prefix to each image filename
             image_urls = ["https://storage.googleapis.com/mixmate/" + image for image in images]
 
             outfit_list = []
-            for i in range(len(items)):
+            for i in range(len(kategori)):
                 outfit = {
                     "images": image_urls[i],
-                    "item_name": items[i],
+                    "item_name": kategori[i],
+                    "rekomendasi": rekomendasi[i],
                     "price": price[i]
                 }
                 outfit_list.append(outfit)
