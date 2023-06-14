@@ -36,7 +36,7 @@ def predict():
             # Convert image bytes to image array using cv2
             nparr = np.frombuffer(image_bytes, np.uint8)
             img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-            result = DeepFace.analyze(img, actions=['age', 'gender', 'race', 'emotion'])
+            result = DeepFace.analyze(img, actions=['gender', 'race'])
             print(result)
             print("================")
             print(result[0]["dominant_gender"])
@@ -73,8 +73,8 @@ def predict():
             for i in range(len(kategori)):
                 outfit = {
                     "images": image_urls[i],
-                    "item_name": kategori[i],
-                    "rekomendasi": rekomendasi[i],
+                    "kategori": kategori[i],
+                    "item_name": rekomendasi[i],
                     "price": price[i]
                 }
                 outfit_list.append(outfit)
